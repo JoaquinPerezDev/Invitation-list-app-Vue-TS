@@ -6,9 +6,27 @@
     FEMALE
   }
 
+  interface Invitee {
+    id: number;
+    name: string;
+    gender: GENDER
+  }
+
   const name = ref("")
   const gender = ref(GENDER.FEMALE)
+  const invitees = ref<Invitee[]>([])
 
+  const addInvitee = ():void => {
+    if(name.value){{
+      invitees.value.push({
+        id: Math.floor(Math.random() * 1000000),
+        name: name.value, 
+        gender: gender.value
+      })
+      name.value = "";
+      gender.value = GENDER.MALE
+    }} 
+  }
 </script>
 
 <template>
@@ -20,6 +38,7 @@
           type="text" 
           placeholder="Name..."
           v-model="name"
+          @keypress.enter="addInvitee"
         />
         <select v-model="gender">
           <option :value="GENDER.MALE">Male</option>
