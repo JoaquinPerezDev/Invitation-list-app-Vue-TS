@@ -1,6 +1,6 @@
 <script setup lang="ts">
-  import { ref } from 'vue';
-  import Card from "../src/components/Cards.vue"
+  import { ref, computed } from 'vue';
+  import Card from "./components/Cards.vue"
 
 
   enum GENDER {
@@ -29,6 +29,24 @@
       gender.value = GENDER.MALE
     }} 
   }
+
+  const count = computed<{
+    female: number,
+    male: number
+  }>(() => {
+    return invitees.value.reduce((countObj, invitee) => {
+      if(invitee.gender === GENDER.MALE) {
+        return {
+          ...countObj,
+          male: countObj.male + 1
+        }
+      } 
+      return {
+          ...countObj,
+          female: countObj.female + 1
+        }
+    } , {male: 0, female: 0})
+  })
 </script>
 
 <template>
@@ -53,6 +71,14 @@
           :key="invitee.id" 
           :invitee="invitee" 
         />
+      </div>
+      <div>
+        <p>
+          Females - {{ count.female }}
+        </p>
+        <p>
+          Males - {{ count.male }}
+        </p>
       </div>
     </div>
   </main>
