@@ -1,18 +1,8 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue';
   import Card from "./components/Cards.vue"
+  import {GENDER, type Invitee} from './types'
 
-
-  enum GENDER {
-    MALE,
-    FEMALE
-  }
-
-  interface Invitee {
-    id: number;
-    name: string;
-    gender: GENDER
-  }
 
   const name = ref("")
   const gender = ref(GENDER.FEMALE)
