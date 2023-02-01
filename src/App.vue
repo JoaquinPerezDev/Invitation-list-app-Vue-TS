@@ -40,10 +40,11 @@
           v-model="name"
           @keypress.enter="addInvitee"
         />
-        <select v-model="gender">
+        <select v-model="gender" @keypress.enter="addInvitee">
           <option :value="GENDER.MALE">Male</option>
           <option :value="GENDER.FEMALE">Female</option>
         </select>
+        {{ invitees }}
       </div>
     </div>
   </main>
